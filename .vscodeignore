@@ -1,0 +1,42 @@
+# 开发/仓库文件
+.git/**
+.gitattributes
+.gitignore
+.vscode/**
+.vscodeignore
+RELEASING.md
+*.log
+*.tmp-*
+*.zip
+.env
+.env.*
+.npmrc
+.DS_Store
+Thumbs.db
+*.vsix
+HANDOFF.md
+package-lock.json
+tools/**
+!tools/launch.js
+!tools/patch-devin.js
+translate.log
+node_modules/.bin/**
+node_modules/.package-lock.json
+# acorn 运行时只需 dist/acorn.js
+node_modules/acorn/bin/**
+node_modules/acorn/dist/*.mjs
+node_modules/acorn/dist/*.d.*
+node_modules/acorn/dist/bin.js
+node_modules/acorn/CHANGELOG.md
+node_modules/acorn/README.md
+# 翻译中间产物（运行时只需 zh.*.json、dom-dict.json、main.i18n.json）
+translations/api-zh.json
+translations/catalog-en.json
+translations/nls-devin.json
+translations/todo-*.json
+translations/workbench-zh.json
+translations/corrections.json
+# 取反规则必须在对应排除规则之后
+translations/catalogs/*.json
+!translations/catalogs/zh.*.json
+!translations/catalogs/dom-dict.json

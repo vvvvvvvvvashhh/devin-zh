@@ -1,0 +1,86 @@
+{
+  "name": "devin-zh",
+  "displayName": "Devin 汉化 (AST)",
+  "description": "Devin Desktop 界面中文汉化：i18next 目录注入 + DOM 显示层 + 合并进官方中文语言包（校验和自动修复、一键还原）",
+  "version": "0.1.9",
+  "publisher": "N1n3VASthR33H",
+  "license": "MIT",
+  "icon": "icon.png",
+  "engines": {
+    "vscode": "^1.80.0"
+  },
+  "categories": [
+    "Other",
+    "Localization"
+  ],
+  "keywords": [
+    "devin",
+    "chinese",
+    "localization",
+    "汉化",
+    "中文"
+  ],
+  "main": "./extension.js",
+  "extensionKind": ["ui"],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "contributes": {
+    "commands": [
+      {
+        "command": "devin-zh.apply",
+        "title": "Devin 汉化: 应用汉化"
+      },
+      {
+        "command": "devin-zh.restore",
+        "title": "Devin 汉化: 还原原版"
+      },
+      {
+        "command": "devin-zh.openRules",
+        "title": "Devin 汉化: 打开翻译词典"
+      }
+    ],
+    "configuration": {
+      "title": "Devin 汉化",
+      "properties": {
+        "devinZh.autoApply": {
+          "scope": "application",
+          "type": "boolean",
+          "default": true,
+          "description": "启动时若界面未汉化则自动应用（Devin 更新后会自动重打，需完全重启 Devin 生效）"
+        },
+        "devinZh.customTranslations": {
+          "scope": "application",
+          "additionalProperties": { "type": "string" },
+          "type": "object",
+          "default": {},
+          "description": "自定义译文 {\"英文原文\": \"中文\"}，作用于 DOM、i18next 和 Devin NLS；须保留原文占位符。修改后手动应用并完全重启"
+        },
+        "devinZh.exclude": {
+          "scope": "application",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": [],
+          "description": "保持英文不翻译的原文列表，修改后执行「Devin 汉化: 应用汉化」并完全重启"
+        }
+      }
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/vvvvvvvvvashhh/devin-zh"
+  },
+  "scripts": {
+    "test": "node tools/test-inject.js && node tools/test-langpack.js && node tools/test-workflow.js && node tools/test-runtime.js",
+    "patch": "node tools/patch-devin.js",
+    "restore": "node tools/patch-devin.js --restore",
+    "pack": "node tools/pack-vsix.js",
+    "build": "node tools/check-sources.js && node tools/build-zh-catalog.js && node tools/build-dom-dict.js && node tools/build-pack.js && node tools/check-translations.js",
+    "build:dict": "node tools/build-dom-dict.js"
+  },
+  "dependencies": {
+    "acorn": "8.19.0"
+  }
+}
